@@ -1,11 +1,32 @@
 import { NextPage } from "next";
 import { Inter } from "next/font/google";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn } from "next-auth/react";
 
 import { Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+
 import Header from "@/components/Header";
+
+const formSchema = z.object({
+  email: z
+    .string({ required_error: "email is required" })
+    .email("enter a valid email"),
+  password: z.string({ required_error: "password is required" }),
+});
+
+export type schema = z.infer<typeof formSchema>;
 
 const inter = Inter({
   subsets: ["latin"],
@@ -13,6 +34,18 @@ const inter = Inter({
 });
 
 const Login: NextPage = () => {
+  const form = useForm<schema>({
+    resolver: zodResolver(formSchema),
+  });
+
+  // 2. Define a submit handler.
+  async function onSubmit(values: schema) {
+    await signIn("credentials", {
+      email: values.email,
+      password: values.password,
+    });
+  }
+
   return (
     <main
       className={`flex flex-col justify-center min-h-screen h-full min-w-screen w-full ${inter.className}`}
@@ -21,17 +54,39 @@ const Login: NextPage = () => {
         <Header />
       </div>
       <div className="mx-auto p-10 my-5 bg-white w-2/3 h-2/3 border-2 border-solid rounded-lg">
-        <div className="mb-2">
-          <Label htmlFor="email">Email</Label>
-          <Input type="email" id="email" placeholder="Email" />
-        </div>
-        <div className="my-2">
-          <Label htmlFor="password">Password</Label>
-          <Input type="password" id="password" placeholder="Password" />
-        </div>
-        <Button className="my-5">
-          <Mail className="mr-2 h-4 w-4" /> Login with Email
-        </Button>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Email" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Password</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Password" {...field} type="password" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button className="my-5" type="submit">
+              <Mail className="mr-2 h-4 w-4" /> Login with Email
+            </Button>
+          </form>
+        </Form>
       </div>
     </main>
   );

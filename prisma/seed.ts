@@ -3,7 +3,7 @@ import prisma from "../lib/prisma";
 async function main() {
   const response = await Promise.all([
     prisma.users.upsert({
-      where: { email: "rauchg@vercel.com" },
+      where: { email: "bme19@example.com" },
       update: {},
       create: {
         email: "bme19@example.com",
