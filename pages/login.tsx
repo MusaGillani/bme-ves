@@ -38,11 +38,11 @@ const Login: NextPage = () => {
     resolver: zodResolver(formSchema),
   });
 
-  // 2. Define a submit handler.
   async function onSubmit(values: schema) {
     await signIn("credentials", {
       email: values.email,
       password: values.password,
+      callbackUrl: "/",
     });
   }
 
