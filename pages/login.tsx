@@ -51,7 +51,7 @@ const Login: NextPage = () => {
       className={`flex flex-col justify-center min-h-screen h-full min-w-screen w-full ${inter.className}`}
     >
       <div className="mx-auto w-2/3">
-        <Header />
+        <Header showSignOut={false} />
       </div>
       <div className="mx-auto p-10 my-5 bg-white w-2/3 h-2/3 border-2 border-solid rounded-lg">
         <Form {...form}>

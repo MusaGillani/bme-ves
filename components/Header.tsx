@@ -8,7 +8,9 @@ import {
 import { Button } from "./ui/button";
 import { signOut } from "next-auth/react";
 
-const Header: React.FC = () => {
+const Header: React.FC<{ showSignOut?: boolean }> = ({
+  showSignOut = true,
+}) => {
   return (
     <div className="flex justify-between">
       <div>
@@ -20,18 +22,20 @@ const Header: React.FC = () => {
           Nuclear Medicine Devices
         </h4>
       </div>
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button variant="ghost" onClick={() => signOut()}>
-              <LogOutIcon size={40} className="m-1" />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Log out</p>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+      {showSignOut && (
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" onClick={() => signOut()}>
+                <LogOutIcon size={40} className="m-1" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Log out</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      )}
     </div>
   );
 };
