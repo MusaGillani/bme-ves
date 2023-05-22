@@ -16,9 +16,7 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
 });
-const playFunction: ReactEventHandler = () => {
-  // Dummy function
-};
+const playFunction: ReactEventHandler = () => {};
 
 function Videos() {
   const sources = [
@@ -35,14 +33,15 @@ function Videos() {
   ];
 
   const router = useRouter();
-  const { name } = router.query;
+  const { name, link } = router.query;
   return (
     <div className="w-full h-full md:w-2/3 m-auto">
       <Link href="/" className="my-5">
         <Header />
       </Link>
+      <h2 className="text-center font-bold text-2xl">{name}</h2>
       <AdvancedVideo
-        cldVid={getAdvancedVideoPropertiesVideo(name as string)}
+        cldVid={getAdvancedVideoPropertiesVideo(link as string)}
         controls
         sources={sources}
         playsInline

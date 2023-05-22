@@ -13,22 +13,21 @@ const inter = Inter({
 });
 
 const videoNames = [
-  { link: "gamma_gpijtf", name: "Gamma" },
-  { link: "", name: "MRI Machine" },
-  { link: "", name: "Ultrasound Machine " },
-  { link: "", name: "Gamma Camera" },
-  { link: "", name: "Echocardiography Machine" },
-  { link: "", name: "Angiography Machine " },
-  { link: "", name: "CT Scanner" },
-  { link: "", name: "SPECT Scanner" },
-  { link: "", name: "PET Scanner" },
-  { link: "", name: "Fluroscope Machine " },
-  { link: "", name: "Mammography Machine" },
-  { link: "", name: "Endoscope " },
-  { link: "", name: "Broncoscope" },
-  { link: "", name: "Colonoscopy" },
-  { link: "", name: "Dental Xray Camera" },
-  { link: "", name: "Xray Camer" },
+  { link: "gamma_gpijtf", name: "Gamma Camera" },
+  { link: "MRI_Machine_mh8vu0", name: "MRI Machine" },
+  { link: "Ultrasound_Machine_jfnexw", name: "Ultrasound Machine " },
+  { link: "Echocardiography_xaxsrq", name: "Echocardiography Machine" },
+  { link: "Angiograph_Machine_gjlf6l", name: "Angiography Machine " },
+  { link: "CT_Scanner_jbhsif", name: "CT Scanner" },
+  { link: "SPECT_h0jgln", name: "SPECT Scanner" },
+  { link: "PET_Scan_sa41lw", name: "PET Scanner" },
+  { link: "Endoscopy_Machine_wel1do", name: "Endoscope " },
+  { link: "Fluroscopy_Machine_yoejv1", name: "Fluroscope Machine " },
+  { link: "Mammography_Machine_ewa1xi", name: "Mammography Machine" },
+  { link: "Endoscopy_Machine_wel1do", name: "Broncoscope" },
+  { link: "Dental_X_ray_gptcpd", name: "Colonoscopy" },
+  { link: "Dental_X_ray_gptcpd", name: "Dental Xray Camera" },
+  { link: "X_ray_ot3ami", name: "Xray Camera" },
 ];
 const Home: NextPage = () => {
   const [searchVal, setSearchVal] = useState("");
@@ -65,7 +64,7 @@ const Home: NextPage = () => {
                 <Link
                   href={{
                     pathname: "/videos",
-                    query: { name: link },
+                    query: { name: name, link: link },
                   }}
                   className="flex"
                 >
